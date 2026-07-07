@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="LG Subscribe"/>
+<meta name="theme-color" content="#C8102E"/>
+<title>LG Subscribe · Epromoter Portal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: { fontFamily: {
+      sans:    ['"IBM Plex Sans Thai"','"Plus Jakarta Sans"','ui-sans-serif','system-ui','sans-serif'],
+      display: ['"Plus Jakarta Sans"','"IBM Plex Sans Thai"','ui-sans-serif','sans-serif']
+    }}}
+  };
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root { --accent:#C8102E; --accent-tint:color-mix(in srgb,#C8102E 8%,white); }
+  html { -webkit-font-smoothing:antialiased; }
+  body {
+    font-family:'IBM Plex Sans Thai','Plus Jakarta Sans',system-ui,sans-serif;
+    min-height:100vh;
+    padding-bottom:env(safe-area-inset-bottom);
+    background:
+      radial-gradient(circle at 12% 8%, rgba(200,16,46,.14), transparent 34%),
+      radial-gradient(circle at 88% 4%, rgba(15,118,110,.1), transparent 28%),
+      radial-gradient(circle at 50% 100%, rgba(200,16,46,.06), transparent 40%),
+      linear-gradient(180deg, #fff 0%, #f8fafc 50%, #f1f5f9 100%);
+  }
+  .font-display { font-family:'Plus Jakarta Sans','IBM Plex Sans Thai',sans-serif; }
+  .hero-glow {
+    position:absolute; inset:-40% -20% auto -20%; height:420px;
+    background:radial-gradient(ellipse at 50% 0%, rgba(200,16,46,.18), transparent 68%);
+    pointer-events:none;
+  }
+  .card {
+    background:rgba(255,255,255,.88);
+    border:1px solid rgba(226,232,240,.9);
+    border-radius:20px;
+    box-shadow:0 10px 40px rgba(15,23,42,.06);
+    backdrop-filter:blur(12px);
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover {
+    transform:translateY(-2px);
+    box-shadow:0 18px 50px rgba(15,23,42,.1);
+    border-color:rgba(200,16,46,.18);
+  }
+  .card:active { transform:translateY(0); }
+  .avatar {
+    width:48px; height:48px; border-radius:16px;
+    display:grid; place-items:center;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800; font-size:14px; color:#fff;
+    background:linear-gradient(135deg,#c8102e,#e23a54);
+    box-shadow:0 10px 24px rgba(200,16,46,.25);
+    flex-shrink:0;
+  }
+  .pill {
+    display:inline-flex; align-items:center; gap:4px;
+    padding:3px 8px; border-radius:999px;
+    font-size:10.5px; font-weight:700; letter-spacing:.02em;
+  }
+  .search-input {
+    width:100%; height:46px; border-radius:14px;
+    border:1px solid #e2e8f0; background:rgba(255,255,255,.9);
+    padding:0 16px 0 44px; font-size:15px; outline:none;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .search-input:focus {
+    border-color:rgba(200,16,46,.45);
+    box-shadow:0 0 0 4px rgba(200,16,46,.1);
+  }
+  .btn-primary {
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    height:44px; padding:0 18px; border-radius:14px;
+    background:linear-gradient(135deg,#c8102e,#e23a54);
+    color:#fff; font-weight:700; font-size:14px;
+    box-shadow:0 12px 28px rgba(200,16,46,.22);
+    transition:transform .15s, box-shadow .15s;
+  }
+  .btn-primary:hover { transform:translateY(-1px); box-shadow:0 16px 34px rgba(200,16,46,.28); }
+  .btn-ghost {
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    height:44px; padding:0 18px; border-radius:14px;
+    background:rgba(255,255,255,.9); border:1px solid #e2e8f0;
+    color:#334155; font-weight:600; font-size:14px;
+    transition:background .15s, border-color .15s;
+  }
+  .btn-ghost:hover { background:#fff; border-color:#cbd5e1; }
+  .calc-banner {
+    background:linear-gradient(135deg, rgba(200,16,46,.95), rgba(226,58,84,.92));
+    border-radius:22px; color:#fff;
+    box-shadow:0 20px 50px rgba(200,16,46,.28);
+  }
+  .fade-in { animation:fadeUp .45s ease-out both; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  .stagger-1{animation-delay:.04s} .stagger-2{animation-delay:.08s} .stagger-3{animation-delay:.12s}
+  .stagger-4{animation-delay:.16s} .stagger-5{animation-delay:.20s} .stagger-6{animation-delay:.24s}
+  .stagger-7{animation-delay:.28s}
+</style>
+</head>
+<body class="text-slate-900">
+
+<div class="hero-glow"></div>
+
+<div class="relative mx-auto max-w-[920px] px-5 pt-[calc(20px+env(safe-area-inset-top))] pb-10">
+
+  <!-- Header -->
+  <header class="fade-in flex items-center justify-between gap-4 mb-8">
+    <div class="flex items-center gap-3.5 min-w-0">
+      <div class="h-12 w-12 rounded-2xl grid place-items-center text-white font-display font-extrabold text-[17px] shrink-0"
+           style="background:linear-gradient(135deg,#c8102e,#e23a54);box-shadow:0 14px 28px rgba(200,16,46,.25)">LG</div>
+      <div class="min-w-0">
+        <div class="font-display font-extrabold text-[22px] tracking-tight leading-tight">Subscribe Portal</div>
+        <div class="text-[13px] text-slate-500 truncate">ศูนย์รวม CRM &amp; เครื่องคำนวณ Epromoter</div>
+      </div>
+    </div>
+    <div class="text-[11px] text-slate-400 font-medium tabular-nums shrink-0 hidden sm:block">Jul 2026</div>
+  </header>
+
+  <!-- Calculator banner -->
+  <section class="fade-in stagger-1 calc-banner p-5 sm:p-6 mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="flex-1 min-w-0">
+        <div class="text-[11px] font-bold uppercase tracking-[.16em] text-white/70 mb-1">เครื่องมือหลัก</div>
+        <div class="font-display font-extrabold text-[20px] sm:text-[22px] leading-tight mb-1">🧮 Subscribe Calculator</div>
+        <div class="text-[13px] text-white/85 leading-relaxed">คำนวณราคา โปรโมชั่น และสรุปแผนให้ลูกค้า</div>
+      </div>
+      <a href="https://pondjeloy.github.io/LG_Subscribe_Calculator_Jul2026/" target="_blank" rel="noopener"
+         class="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl bg-white text-[var(--accent)] font-bold text-[14px] shadow-lg shrink-0">
+        เปิดเครื่องคำนวณ
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Search -->
+  <section class="fade-in stagger-2 mb-5">
+    <div class="relative">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"
+           class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="search" class="search-input" type="search" placeholder="ค้นหา Epromoter…" autocomplete="off" enterkeyhint="search"/>
+    </div>
+  </section>
+
+  <!-- CRM grid -->
+  <section class="mb-6">
+    <div class="flex items-center justify-between mb-3 px-0.5">
+      <div class="text-[11px] font-bold uppercase tracking-[.14em] text-slate-400">รายชื่อลูกค้า CRM</div>
+      <div id="count" class="text-[12px] text-slate-400 font-medium tabular-nums">8 คน</div>
+    </div>
+    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
+    <div id="empty" class="hidden text-center py-14 text-slate-400 text-[14px]">ไม่พบชื่อที่ค้นหา</div>
+  </section>
+
+  <!-- Tips -->
+  <section class="fade-in stagger-7 card p-5">
+    <div class="text-[11px] font-bold uppercase tracking-[.12em] text-slate-400 mb-3">📱 เปิดบน iPhone</div>
+    <ol class="text-[13px] text-slate-600 space-y-2 leading-relaxed list-decimal list-inside">
+      <li>เปิดลิงก์ CRM ใน <b>Safari</b> (แนะนำ)</li>
+      <li>กด <b>แชร์</b> → <b>Add to Home Screen</b> เพื่อทำเป็นไอคอนแอป</li>
+      <li>ครั้งแรกอาจต้องตั้งค่า Apps Script URL ใน ⚙️</li>
+    </ol>
+  </section>
+
+  <footer class="mt-8 text-center text-[11.5px] text-slate-400">
+    LG Subscribe Sales Tooling · Epromoter Team
+  </footer>
+</div>
+
+<script>
+const PROMOTERS = [
+  { name:'POND',      url:'https://pondjeloy.github.io/Subscribe-CRM-Epromoter-POND/' },
+  { name:'CHANWIT',   url:'https://pondjeloy.github.io/Subscribe-CRM-Epromoter-CHANWIT/' },
+  { name:'WICHIT',    url:'https://pondjeloy.github.io/Subscribe-CRM-Epromoter-WICHIT/' },
+  { name:'SHANCHANOK',url:'https://pondjeloy.github.io/Subscribe-CRM-Epromoter-SHANCHANOK/' },
+  { name:'WUTTICHAI', url:'https://pondjeloy.github.io/Subscribe-CRM-Epromoter-WUTTICHAI/', badge:'วันที่อย่างเดียว', badgeStyle:'background:#ecfdf5;color:#047857' },
+  { name:'TAKDANAI',  url:'https://pondjeloy.github.io/Subscribe-CRM-Epromoter-TAKDANAI/' },
+  { name:'NOPPARAT',  url:'https://pondjeloy.github.io/Subscribe-CRM-Epromoter-NOPPARAT/' },
+  { name:'NARASAK',   url:'https://pondjeloy.github.io/Subscribe-CRM-Epromoter-NARASAK/' },
+];
+
+const grid   = document.getElementById('grid');
+const search = document.getElementById('search');
+const count  = document.getElementById('count');
+const empty  = document.getElementById('empty');
+
+function initials(name) {
+  return name.length <= 4 ? name.slice(0,2) : name.slice(0,1);
+}
+
+function card(p, i) {
+  const badge = p.badge
+    ? `<span class="pill" style="${p.badgeStyle||''}">${p.badge}</span>` : '';
+  return `
+    <a href="${p.url}" class="card fade-in stagger-${Math.min(i+1,7)} block p-4 sm:p-[18px] no-underline text-inherit">
+      <div class="flex items-start gap-3.5">
+        <div class="avatar">${initials(p.name)}</div>
+        <div class="flex-1 min-w-0 pt-0.5">
+          <div class="flex items-center gap-2 flex-wrap mb-1">
+            <div class="font-display font-extrabold text-[16px] text-slate-900 tracking-tight">${p.name}</div>
+            ${badge}
+          </div>
+          <div class="text-[12.5px] text-slate-500 mb-3">Subscribe CRM · รายชื่อลูกค้า</div>
+          <span class="btn-primary w-full sm:w-auto text-[13px] h-10 px-4 rounded-xl">
+            เข้าสู่ระบบ CRM
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </a>`;
+}
+
+function render(list) {
+  grid.innerHTML = list.map((p,i) => card(p,i)).join('');
+  count.textContent = list.length + ' คน';
+  empty.classList.toggle('hidden', list.length > 0);
+  grid.classList.toggle('hidden', list.length === 0);
+}
+
+search.addEventListener('input', () => {
+  const q = search.value.trim().toLowerCase();
+  render(q ? PROMOTERS.filter(p => p.name.toLowerCase().includes(q)) : PROMOTERS);
+});
+
+render(PROMOTERS);
+</script>
+</body>
+</html>
